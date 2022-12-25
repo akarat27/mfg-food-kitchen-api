@@ -31,7 +31,8 @@ var pool = mysql.createPool({
     port     : baseconfig.mysql_port,
     user     : baseconfig.mysql_user,
     password : baseconfig.mysql_password,
-    database : baseconfig.mysql_database
+    database : baseconfig.mysql_database,
+    ssl: true
 });
 
 var getConnection = function(callback) {

@@ -7,8 +7,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var baseconfig = require('./config/config')
 
+//Database initial connection
+var mysql_orm = require('./database/mysql-orm');
+
 //route
-var delivery = require('./routes/delivery.js');
+var common = require('./routes/common.js'); //var delivery = require('./routes/delivery.js');
+var kitchen = require('./routes/kitchen.js');
 
 var app = express();
 
@@ -28,7 +32,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', delivery);
+app.use('/api', common);  //app.use('/api', delivery);
+app.use('/kitchen-api/v1', kitchen);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

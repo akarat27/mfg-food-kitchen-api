@@ -7,7 +7,8 @@ const httpStatus = require('http-status');
 const APIError = require('../helper/APIError');
 
 //Database initial connection
-var mysqldb = require('./../mysql-client');
+//var mysqldb = require('./../mysql-client');
+var mysql_orm = require('./../database/mysql-orm');
 
 /* GET users listing. */
 router.get('/healthcheck', function(req ,res, next){
