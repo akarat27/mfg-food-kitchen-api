@@ -48,4 +48,5 @@ const config = {
     monitoring_time_thershold: envVars.monitoring_time_thershold
 }
 
+console.dir(config)
 module.exports = config;
