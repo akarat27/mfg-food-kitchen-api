@@ -28,6 +28,9 @@ const connectionConfig = {
     ssl: true
 }
 
+console.log('[LOADING DATABASE] datbase configuration ')
+console.log(connectionConfig)
+
 createConnection(connectionConfig)
 .then((connection) => {
     console.log(JSON.stringify(connectionConfig))
