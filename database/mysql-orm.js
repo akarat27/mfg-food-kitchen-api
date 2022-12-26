@@ -117,6 +117,10 @@ createConnection(connectionConfig)
     // })
     
 })
+.catch((conErr) => {
+    console.log('[TYPEORM_DB_CONNECTION_ERROR] Error of ')
+    console.log(conErr)
+})
 
 
 const databaseIsOn = function() {
