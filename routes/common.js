@@ -6,6 +6,13 @@ router.get('/healthcheck', function(req ,res, next){
     res.send(JSON.stringify({"status":"ok"}));
 })
 
+router.get('/dbconnect2', function(req ,res, next){
+    var getConnection = require('./../mysql-client');
+    getConnection((err,callback) => {
+        res.send(callback);
+    })
+})
+
 router.get('/dbconnect', function(req ,res, next){
 
     const {createConnection} = require('typeorm');

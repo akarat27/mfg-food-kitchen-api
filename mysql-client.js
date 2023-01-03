@@ -1,4 +1,4 @@
-var mysql      = require('mysql');
+var mysql      = require('mysql2');
 var logger = require('./config/winston')(__filename)
 var baseconfig = require('./config/config')
 /*
@@ -27,18 +27,26 @@ var pool = mysql.createPool({
     connectionLimit : 80,
     acquireTimeout : 120000,
     conneectionTimeout : 120000,
-    host     : process.env.DB_HOST, //baseconfig.mysql_host, //'172.17.0.1',
+    host     : baseconfig.mysql_host,// process.env.DB_HOST, //baseconfig.mysql_host, //'172.17.0.1',
     port     : baseconfig.mysql_port,
     user     : baseconfig.mysql_user,
     password : baseconfig.mysql_password,
     database : baseconfig.mysql_database,
-    ssl: true
+    ssl: {
+        // DO NOT DO THIS
+        // set up your ca correctly to trust the connection
+        rejectUnauthorized: false
+      }
 });
 
 var getConnection = function(callback) {
     pool.getConnection(function(err, connection) {
         console.log("start db connnection")
-        callback(err, connection);
+        //console.log(connection)
+        connection.query("SELECT * FROM food_sites", function(err, rows, fields) {
+            // Connection is automatically released when query resolves
+            callback(err, rows);
+         })
     });
 };
 
