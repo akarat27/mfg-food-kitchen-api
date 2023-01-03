@@ -11,7 +11,7 @@ const connectionConfig = {
     type: "mysql",// "mariadb",
     charset: 'utf8mb4',
     //timezone : '+07:00',
-    connectTimeout: 120000,
+    connectTimeout: 30000,//120000,
     host     : baseconfig.mysql_host, //process.env.DB_HOST,
     port     : baseconfig.mysql_port,
     username : baseconfig.mysql_user,
@@ -25,7 +25,12 @@ const connectionConfig = {
         require("./entity/FoodUsers")
     ],
     synchronize: false,
-    ssl: true
+    ssl  : {
+        // DO NOT DO THIS
+        // set up your ca correctly to trust the connection
+        rejectUnauthorized: false
+      }
+    // ssl: true
 }
 
 console.log('[LOADING DATABASE] datbase configuration ')
@@ -33,6 +38,7 @@ console.log(connectionConfig)
 
 createConnection(connectionConfig)
 .then((connection) => {
+    console.log('[ORM] connection connected');
     console.log(JSON.stringify(connectionConfig))
     console.log('[ORM] entiry mapped');
     connection.entityMetadatas.forEach(entity => {
