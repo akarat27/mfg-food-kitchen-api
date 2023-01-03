@@ -18,6 +18,7 @@ const connectionConfig = {
     password : baseconfig.mysql_password,
     database : baseconfig.mysql_database,
     entities: [
+        //"entity/*.js" // <============= check if this is correct and our entities are on this path
         require("./entity/FoodOrders"),
         require("./entity/FoodOrdersStaus"),
         require("./entity/FoodProcessConfiguration"),
@@ -39,6 +40,7 @@ console.log(connectionConfig)
 createConnection(connectionConfig)
 .then((connection) => {
     console.log('[ORM] connection connected');
+    console.log(connection)
     console.log(JSON.stringify(connectionConfig))
     console.log('[ORM] entiry mapped');
     connection.entityMetadatas.forEach(entity => {
